@@ -8,121 +8,244 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 
     <style>
-        /* THE VISUAL STYLING */
-        body {
+        /* --- GLOBAL STYLES --- */
+        body, html {
             margin: 0;
-            background-color: #0f0f0f; /* Dark Mode Background */
+            padding: 0;
+            background-color: #050505; /* Deep Black */
             color: white;
-            font-family: 'Courier New', monospace; /* Coding font */
-            overflow-x: hidden;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow-x: hidden; /* Stop horizontal scrolling */
         }
 
-        /* The 3D Container */
-        #3d-container {
-            height: 50vh; /* Takes up half the screen */
+        /* --- SECTION 1: HERO (3D Background) --- */
+        .hero-container {
+            position: relative;
             width: 100%;
+            height: 100vh; /* Full Screen Height */
+            overflow: hidden;
+        }
+
+        /* The 3D Iframe from Spline */
+        .spline-bg {
+            position: absolute;
+            top: 0; 
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+            z-index: 1; /* Behind text */
+        }
+
+        /* The Text Overlay */
+        .hero-content {
+            position: relative;
+            z-index: 10; /* On top of 3D */
+            height: 100%;
             display: flex;
-            align-items: center;
+            flex-direction: column;
             justify-content: center;
-            background: linear-gradient(45deg, #1a1a1a, #000000);
-        }
-
-        .hero-text {
+            align-items: center;
+            pointer-events: none; /* Let clicks pass through to the 3D background */
             text-align: center;
-            z-index: 10;
         }
 
-        h1 { font-size: 3rem; text-shadow: 0 0 10px #00ffcc; } /* Neon Glow */
+        /* Glass Box for Text so it's readable */
+        .glass-box {
+            background: rgba(0, 0, 0, 0.3); /* Semi-transparent black */
+            backdrop-filter: blur(10px);    /* Blur effect */
+            padding: 40px 60px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            pointer-events: auto; /* Re-enable clicks for buttons */
+        }
 
-        /* The Cool Buttons */
-        .neon-button {
-            background: transparent;
-            border: 2px solid #00ffcc;
-            color: #00ffcc;
-            padding: 10px 20px;
+        /* --- THE FIX IS HERE --- */
+        h1 {
+            font-size: 4rem;
+            margin: 0;
+            background: linear-gradient(to right, #00dbde, #fc00ff);
+            
+            /* The Fix: We define both the webkit AND the standard property */
+            -webkit-background-clip: text; 
+            background-clip: text; 
+            
+            -webkit-text-fill-color: transparent;
+            color: transparent; /* Fallback for standard browsers */
+            
+            font-weight: 800;
+        }
+
+        p.subtitle {
+            font-size: 1.5rem;
+            color: #ccc;
+            margin-top: 10px;
+            font-family: 'Courier New', monospace;
+        }
+
+        /* Neon Button */
+        .btn-neon {
+            margin-top: 30px;
+            padding: 15px 40px;
             font-size: 1.2rem;
+            background: transparent;
+            color: #00dbde;
+            border: 2px solid #00dbde;
+            border-radius: 50px;
             cursor: pointer;
             transition: 0.3s;
-            box-shadow: 0 0 5px #00ffcc;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: bold;
+            box-shadow: 0 0 10px rgba(0, 219, 222, 0.2);
         }
 
-        .neon-button:hover {
-            background: #00ffcc;
-            color: black;
-            box-shadow: 0 0 20px #00ffcc; /* Glow effect on hover */
+        .btn-neon:hover {
+            background: #00dbde;
+            color: #000;
+            box-shadow: 0 0 30px #00dbde;
         }
 
-        /* The Slideshow Section */
-        .project-section { padding: 50px; }
-        
+        /* --- SECTION 2: PROJECTS (Slideshow) --- */
+        .projects-section {
+            padding: 80px 20px;
+            background: #0a0a0a;
+            text-align: center;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            border-bottom: 2px solid #333;
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+
         .swiper {
             width: 100%;
-            height: 300px;
+            padding-top: 50px;
+            padding-bottom: 50px;
         }
 
+        /* The Card Style */
         .swiper-slide {
-            background: #222;
-            border-radius: 15px;
+            background: #1a1a1a;
+            width: 300px;
+            height: 400px;
+            border-radius: 20px;
+            border: 1px solid #333;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
+            padding: 20px;
+            box-sizing: border-box;
+            /* 3D Tilt Settings */
+            transform-style: preserve-3d;
+            transform: perspective(1000px); 
+        }
+
+        .project-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+        }
+
+        .project-title {
             font-size: 1.5rem;
-            border: 1px solid #444;
+            color: #fff;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .project-desc {
+            color: #aaa;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .tech-stack {
+            margin-top: 20px;
+            font-size: 0.8rem;
+            color: #00dbde;
+            font-family: monospace;
         }
     </style>
 </head>
 <body>
 
-    <div id="3d-container">
-        <div class="hero-text">
-            <h1>HI, I AM ASHWIN</h1>
-            <p>CS B-Tech | Backend | AI</p>
-            <button class="neon-button">View My Work</button>
+    <div class="hero-container">
+        <iframe src="https://my.spline.design/shapethevibe-SbjkLPCopsywCHCR2N2X5CAG-DX2/" frameborder="0" width="100%" height="100%" class="spline-bg"></iframe>
+
+        <div class="hero-content">
+            <div class="glass-box">
+                <h1>ASHWIN KUMAR</h1>
+                <p class="subtitle">B-Tech CS | Backend | AI Developer</p>
+                <button class="btn-neon" onclick="document.querySelector('.projects-section').scrollIntoView({behavior: 'smooth'})">View Projects</button>
+            </div>
         </div>
     </div>
 
-    <div class="project-section">
-        <h2>My Projects</h2>
-        
-        <div class="swiper">
+    <div class="projects-section">
+        <h2 class="section-title">My Projects</h2>
+
+        <div class="swiper mySwiper">
             <div class="swiper-wrapper">
-                <div class="swiper-slide">
-                    <div>
-                        <h3>Virtual Mouse</h3>
-                        <p>OpenCV & Python</p>
+                
+                <div class="swiper-slide" data-tilt>
+                    <div class="project-icon">🖱️</div>
+                    <div class="project-title">AI Virtual Mouse</div>
+                    <div class="project-desc">
+                        Control your computer cursor using hand gestures. No hardware required, just a webcam and Python code.
                     </div>
+                    <div class="tech-stack">[Python] [OpenCV] [MediaPipe]</div>
                 </div>
-                <div class="swiper-slide">
-                    <div>
-                        <h3>UAV Transformer</h3>
-                        <p>AI Research</p>
+
+                <div class="swiper-slide" data-tilt>
+                    <div class="project-icon">🚁</div>
+                    <div class="project-title">UAV Path Planning</div>
+                    <div class="project-desc">
+                        Research on using Transformer models to help drones navigate complex environments autonomously.
                     </div>
+                    <div class="tech-stack">[Deep Learning] [Transformers] [AI]</div>
                 </div>
-                <div class="swiper-slide">
-                    <div>
-                        <h3>Cache Simulator</h3>
-                        <p>COA / Python</p>
+
+                <div class="swiper-slide" data-tilt>
+                    <div class="project-icon">💾</div>
+                    <div class="project-title">Cache Simulator</div>
+                    <div class="project-desc">
+                        A visual tool to simulate how CPU cache memory works, tracking hits, misses, and replacement policies.
                     </div>
+                    <div class="tech-stack">[Python] [COA Principles]</div>
                 </div>
+
+                <div class="swiper-slide" data-tilt>
+                    <div class="project-icon">📚</div>
+                    <div class="project-title">GATE 2026</div>
+                    <div class="project-desc">
+                        Currently preparing for GATE CS. Solving complex problems in Algorithms and Data Structures.
+                    </div>
+                    <div class="tech-stack">[Algorithms] [DBMS] [OS]</div>
+                </div>
+
             </div>
-            <div class="swiper-button-next"></div>
-            <div class="swiper-button-prev"></div>
+            <div class="swiper-pagination"></div>
         </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.0/vanilla-tilt.min.js"></script>
+
     <script>
-        // Initialize the Slideshow
-        const swiper = new Swiper('.swiper', {
-            loop: true, // Makes it go round in circles
-            navigation: {
-                nextEl: '.swiper-button-next',
-                prevEl: '.swiper-button-prev',
-            },
-            effect: 'coverflow', // The cool "3D Card" flip effect
+        // Initialize Swiper (The Slideshow)
+        var swiper = new Swiper(".mySwiper", {
+            effect: "coverflow",
             grabCursor: true,
             centeredSlides: true,
-            slidesPerView: 'auto',
+            slidesPerView: "auto",
             coverflowEffect: {
                 rotate: 50,
                 stretch: 0,
@@ -130,6 +253,17 @@
                 modifier: 1,
                 slideShadows: true,
             },
+            pagination: {
+                el: ".swiper-pagination",
+            },
+        });
+
+        // Initialize Tilt (The 3D Card Hover)
+        VanillaTilt.init(document.querySelectorAll(".swiper-slide"), {
+            max: 25,
+            speed: 400,
+            glare: true,
+            "max-glare": 0.5,
         });
     </script>
 </body>
