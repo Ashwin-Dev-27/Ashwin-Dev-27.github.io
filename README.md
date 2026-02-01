@@ -4,7 +4,7 @@
 📍 Patna, India
 
 ## 👋 About Me
-I am a 4th-semester B-Tech student passionate about building systems that solve real problems. Currently preparing for GATE 2026 and exploring the intersection of UAVs and Transformers.
+I am a 5th-semester B-Tech student passionate about building systems that solve real problems. Currently preparing for GATE 2026 and exploring the intersection of UAVs and Transformers.
 
 ## 🚀 Key Projects
 
