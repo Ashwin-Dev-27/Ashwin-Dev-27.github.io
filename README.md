@@ -12,7 +12,6 @@ I am a 5th-semester B-Tech student passionate about building systems that solve 
 * **The Challenge:** Controlling a computer without hardware.
 * **The Solution:** Built a system using Python, OpenCV, and MediaPipe to track hand gestures for cursor control.
 * **Tech Stack:** Python, OpenCV.
-* [Link to Code] (Put your repository link here)
 
 ### 2. UAV Path Planning (AI Research)
 * **The Challenge:** Drones often struggle with efficient pathing in complex environments.
