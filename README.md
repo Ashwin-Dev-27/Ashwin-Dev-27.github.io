@@ -1,3 +1,16 @@
+<div align="center">
+
+# ✨ Ashwin Dev 27.github.io ✨
+
+[![Status](https://img.shields.io/badge/Status-Active-success.svg)]()
+[![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)]()
+[![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white)]()
+
+
+</div>
+
+---
+
 # Ashwin Kumar
 **Computer Science Student | Backend Developer | AI Enthusiast**
 
